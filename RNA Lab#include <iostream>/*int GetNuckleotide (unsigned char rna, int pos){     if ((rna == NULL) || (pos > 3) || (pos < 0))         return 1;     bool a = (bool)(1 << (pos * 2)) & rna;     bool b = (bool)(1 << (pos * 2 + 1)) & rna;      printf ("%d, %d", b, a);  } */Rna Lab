@@ -1,0 +1,35 @@
+#include <iostream>
+
+/*
+int GetNuckleotide (unsigned char rna, int pos){
+    if ((rna == NULL) || (pos > 3) || (pos < 0))
+        return 1;
+    bool a = (bool)(1 << (pos * 2)) & rna;
+    bool b = (bool)(1 << (pos * 2 + 1)) & rna;
+
+    printf ("%d, %d", b, a);
+
+}
+*/
+
+int Get (unsigned char rna, int pos){
+    if ((pos > 4) || (pos < 1))
+        return 1;
+    rna >>= 2 * (4 - pos);
+
+    return rna & 0x03;
+
+}
+
+int main() {
+    using namespace std;
+
+    unsigned char rna = 0xFF;
+
+    int pos;
+
+    cin >> pos;
+    cout << Get(rna, pos);
+
+    return 0;
+}
