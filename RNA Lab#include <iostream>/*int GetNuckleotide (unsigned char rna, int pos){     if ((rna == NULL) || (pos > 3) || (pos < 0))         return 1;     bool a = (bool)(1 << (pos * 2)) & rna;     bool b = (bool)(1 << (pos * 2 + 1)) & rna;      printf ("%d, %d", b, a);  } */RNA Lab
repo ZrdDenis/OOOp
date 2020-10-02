@@ -1,25 +1,52 @@
 #include <iostream>
 
-/*
-int GetNuckleotide (unsigned char rna, int pos){
-    if ((rna == NULL) || (pos > 3) || (pos < 0))
-        return 1;
-    bool a = (bool)(1 << (pos * 2)) & rna;
-    bool b = (bool)(1 << (pos * 2 + 1)) & rna;
 
-    printf ("%d, %d", b, a);
+enum Nucleotide{
+    Thymine,  //00
+    Cytosine, //01
+    Guanine,  //10
+    Adenine   //11
+};
 
-}
-*/
+class RNA {
+private:
+    int capacity;
+        int size;
+
+    int arr_len(double quantity) const {
+        return ceil(quantity/4);
+    }
+
+public:
+
+    RNA() {
+        chain = NULL;
+        capacity = 0;
+        size = 0;
+    }
+
 
 int Get (unsigned char rna, int pos){
     if ((pos > 4) || (pos < 1))
-        return 1;
+        return EXIT_FAILURE;
     rna >>= 2 * (4 - pos);
 
-    return rna & 0x03;
+    int nucl =  rna & 0x03;
 
+    switch (nucl){
+        case (Thymine):
+            return Thymine;
+        case (Cytosine):
+            return Cytosine;
+        case (Guanine):
+            return Guanine;
+        case (Adenine):
+            return Adenine;
+        default:
+            return EXIT_FAILURE;
+    }
 }
+
 
 int main() {
     using namespace std;
